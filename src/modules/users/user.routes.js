@@ -2,6 +2,7 @@ const router = require('express').Router();
 const ctrl = require('./user.controller');
 const auth = require('../../middlewares/auth');
 const role = require('../../middlewares/role');
+const { validateRegister, validateLogin } = require('../../middlewares/validate');
 
 /**
  * @swagger
@@ -33,7 +34,7 @@ const role = require('../../middlewares/role');
  *       201: { description: User created }
  *       400: { description: Email already in use }
  */
-router.post('/register', ctrl.register);
+router.post('/register', validateRegister, ctrl.register);
 
 /**
  * @swagger
@@ -56,7 +57,7 @@ router.post('/register', ctrl.register);
  *       200: { description: Returns JWT token }
  *       401: { description: Invalid credentials }
  */
-router.post('/login', ctrl.login);
+router.post('/login', validateLogin, ctrl.login);
 
 /**
  * @swagger
