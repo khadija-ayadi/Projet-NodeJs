@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const ctrl = require('./client.controller');
 const auth = require('../../middlewares/auth');
+const { validateClient } = require('../../middlewares/validate');
+
+
 
 
 
@@ -44,9 +47,15 @@ const auth = require('../../middlewares/auth');
  */
 router.use(auth);
 router.get('/',    ctrl.getAll);
+<<<<<<< HEAD
 router.post('/', ctrl.create);
 router.get('/:id',    ctrl.getById);
 router.put('/:id', ctrl.update);
+=======
+router.post('/', validateClient , ctrl.create);
+router.get('/:id',    ctrl.getById);
+router.put('/:id',  validateClient, ctrl.update);
+>>>>>>> 3354299 (last modification)
 router.delete('/:id', ctrl.delete);
 
 module.exports = router;

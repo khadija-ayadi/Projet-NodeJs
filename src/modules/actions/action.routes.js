@@ -1,7 +1,11 @@
 const router = require('express').Router();
 const ctrl = require('./action.controller');
 const auth = require('../../middlewares/auth');
+<<<<<<< HEAD
 const { validateInvoice } = require('../../middlewares/validate');
+=======
+const {validateAction } = require('../../middlewares/validate');
+>>>>>>> 3354299 (last modification)
 /**
  * @swagger
  * tags:
@@ -42,7 +46,11 @@ const { validateInvoice } = require('../../middlewares/validate');
  */
 router.use(auth);
 router.get('/',  ctrl.getAll);
+<<<<<<< HEAD
 router.post('/', validateInvoice, ctrl.create);
+=======
+router.post('/', validateAction, ctrl.create);
+>>>>>>> 3354299 (last modification)
 
 /**
  * @swagger
@@ -90,7 +98,11 @@ router.get('/client/:clientId', ctrl.getByClient);
  *     responses:
  *       200: { description: Action deleted }
  */
+<<<<<<< HEAD
 router.put('/:id', validateInvoice, ctrl.update);
+=======
+router.put('/:id', validateAction, ctrl.update);
+>>>>>>> 3354299 (last modification)
 router.delete('/:id', ctrl.delete);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ctrl = require('./payment.controller');
 const auth = require('../../middlewares/auth');
+const { validatePayment } = require('../../middlewares/validate');
 
 /**
  * @swagger
@@ -39,7 +40,7 @@ const auth = require('../../middlewares/auth');
  *       200: { description: List of payments }
  */
 router.use(auth);
-router.post('/', ctrl.record);
+router.post('/',validatePayment, ctrl.record);
 router.get('/',  ctrl.getAll);
 router.get('/invoice/:invoiceId', ctrl.getByInvoice);
 
