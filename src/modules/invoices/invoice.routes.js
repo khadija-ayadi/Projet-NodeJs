@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const ctrl = require('./invoice.controller');
 const auth = require('../../middlewares/auth');
+const { validateInvoice } = require('../../middlewares/validate');
 
 /**
  * @swagger
@@ -42,12 +43,10 @@ const auth = require('../../middlewares/auth');
  */
 router.use(auth);
 router.get('/',  ctrl.getAll);
-router.post('/', ctrl.create);
-
+router.post('/', validateInvoice   , ctrl.create);
 router.get('/:id',    ctrl.getById);
-router.put('/:id',    ctrl.update);
+router.put('/:id', validateInvoice, ctrl.update);
 router.delete('/:id', ctrl.delete);
-
 router.patch('/:id/status', ctrl.updateStatus);
 
 module.exports = router;

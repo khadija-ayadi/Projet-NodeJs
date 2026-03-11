@@ -1,10 +1,15 @@
 const router = require('express').Router();
 const ctrl = require('./action.controller');
 const auth = require('../../middlewares/auth');
+const {validateAction } = require('../../middlewares/validate');
+/**
+ * @swagger
+ * tags:
+ *   name: Actions
+ *   description: Recovery actions management
+ */
 
 /**
- @swagger
- 
  * @swagger
  * /api/actions:
  *   get:
@@ -37,7 +42,7 @@ const auth = require('../../middlewares/auth');
  */
 router.use(auth);
 router.get('/',  ctrl.getAll);
-router.post('/', ctrl.create);
+router.post('/', validateAction, ctrl.create);
 
 /**
  * @swagger
@@ -85,7 +90,7 @@ router.get('/client/:clientId', ctrl.getByClient);
  *     responses:
  *       200: { description: Action deleted }
  */
-router.put('/:id',    ctrl.update);
+router.put('/:id', validateAction, ctrl.update);
 router.delete('/:id', ctrl.delete);
 
 module.exports = router;
