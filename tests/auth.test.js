@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-const request = require('supertest');
-const mongoose = require('mongoose');
-const app = require('../src/modules/app');
-
-beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI_TEST || 'mongodb://localhost:27017/recouvra_test');
-=======
 process.env.JWT_SECRET = 'recouvra_secret_key_2024';
 process.env.JWT_EXPIRES_IN = '7d';
 
@@ -17,7 +9,6 @@ const User = require('../src/modules/users/user.model');
 beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URI_TEST || 'mongodb://localhost:27017/recouvra_test');
     await User.deleteMany(); // clean start
->>>>>>> 3354299 (last modification)
 });
 
 afterAll(async () => {
@@ -25,7 +16,6 @@ afterAll(async () => {
     await mongoose.connection.close();
 });
 
-<<<<<<< HEAD
 describe('Auth - Register', () => {
     it('should register a new user', async () => {
         const res = await request(app).post('/api/users/register').send({
@@ -35,16 +25,10 @@ describe('Auth - Register', () => {
             role:     'agent',
         });
         expect(res.statusCode).toBe(201);
-        expect(res.body).toHaveProperty('token');
+        expect(res.body).toHaveProperty('user');
     });
 
     it('should fail if email already exists', async () => {
-        await request(app).post('/api/users/register').send({
-            name:     'John Doe',
-            email:    'john@example.com',
-            password: '123456',
-            role:     'agent',
-        });
         const res = await request(app).post('/api/users/register').send({
             name:     'John Doe',
             email:    'john@example.com',
@@ -63,24 +47,16 @@ describe('Auth - Register', () => {
 });
 
 describe('Auth - Login', () => {
-    it('should login with correct credentials', async () => {
-=======
-describe('Auth - Login', () => {
     beforeAll(async () => {
-        await User.deleteMany();
->>>>>>> 3354299 (last modification)
         await request(app).post('/api/users/register').send({
             name:     'Jane Doe',
             email:    'jane@example.com',
             password: '123456',
             role:     'agent',
         });
-<<<<<<< HEAD
-=======
     });
 
     it('should login with correct credentials', async () => {
->>>>>>> 3354299 (last modification)
         const res = await request(app).post('/api/users/login').send({
             email:    'jane@example.com',
             password: '123456',

@@ -46,16 +46,10 @@ const { validateClient } = require('../../middlewares/validate');
  *       200: { description: Client created }
  */
 router.use(auth);
-router.get('/',    ctrl.getAll);
-<<<<<<< HEAD
-router.post('/', ctrl.create);
-router.get('/:id',    ctrl.getById);
-router.put('/:id', ctrl.update);
-=======
-router.post('/', validateClient , ctrl.create);
-router.get('/:id',    ctrl.getById);
-router.put('/:id',  validateClient, ctrl.update);
->>>>>>> 3354299 (last modification)
+router.get('/',     ctrl.getAll);
+router.post('/',    ctrl.create);
+router.get('/:id',  ctrl.getById);
+router.put('/:id',  ctrl.update);
 router.delete('/:id', ctrl.delete);
 
 module.exports = router;

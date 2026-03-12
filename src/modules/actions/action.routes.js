@@ -1,16 +1,13 @@
 const router = require('express').Router();
 const ctrl = require('./action.controller');
 const auth = require('../../middlewares/auth');
-<<<<<<< HEAD
-const { validateInvoice } = require('../../middlewares/validate');
-=======
-const {validateAction } = require('../../middlewares/validate');
->>>>>>> 3354299 (last modification)
+const { validateAction } = require('../../middlewares/validate');
+
 /**
  * @swagger
  * tags:
  *   name: Actions
- *   description: Recovery actions management
+ *   description: Recovery actions tracking
  */
 
 /**
@@ -36,8 +33,8 @@ const {validateAction } = require('../../middlewares/validate');
  *             type: object
  *             required: [client, type]
  *             properties:
- *               client:  { type: string, example: "64abc123..." }
- *               invoice: { type: string, example: "64abc456..." }
+ *               client:  { type: string }
+ *               invoice: { type: string }
  *               type:    { type: string, enum: [call, email, letter, visit, other] }
  *               note:    { type: string }
  *               result:  { type: string, enum: [pending, promise, refused, no_answer] }
@@ -46,11 +43,7 @@ const {validateAction } = require('../../middlewares/validate');
  */
 router.use(auth);
 router.get('/',  ctrl.getAll);
-<<<<<<< HEAD
-router.post('/', validateInvoice, ctrl.create);
-=======
 router.post('/', validateAction, ctrl.create);
->>>>>>> 3354299 (last modification)
 
 /**
  * @swagger
@@ -98,11 +91,7 @@ router.get('/client/:clientId', ctrl.getByClient);
  *     responses:
  *       200: { description: Action deleted }
  */
-<<<<<<< HEAD
-router.put('/:id', validateInvoice, ctrl.update);
-=======
-router.put('/:id', validateAction, ctrl.update);
->>>>>>> 3354299 (last modification)
+router.put('/:id',    validateAction, ctrl.update);
 router.delete('/:id', ctrl.delete);
 
 module.exports = router;
