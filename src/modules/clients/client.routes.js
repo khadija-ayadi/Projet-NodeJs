@@ -3,13 +3,6 @@ const ctrl = require('./client.controller');
 const auth = require('../../middlewares/auth');
 const { validateClient } = require('../../middlewares/validate');
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> main
-
 /**
  * @swagger
  * tags:
@@ -49,17 +42,10 @@ const { validateClient } = require('../../middlewares/validate');
  *       200: { description: Client created }
  */
 router.use(auth);
-<<<<<<< HEAD
-router.get('/',    ctrl.getAll);
-router.post('/', validateClient , ctrl.create);
-router.get('/:id',    ctrl.getById);
-router.put('/:id',  validateClient, ctrl.update);
-=======
 router.get('/',     ctrl.getAll);
-router.post('/',    ctrl.create);
+router.post('/',    validateClient, ctrl.create);
 router.get('/:id',  ctrl.getById);
-router.put('/:id',  ctrl.update);
->>>>>>> main
+router.put('/:id',  validateClient, ctrl.update);
 router.delete('/:id', ctrl.delete);
 
 module.exports = router;

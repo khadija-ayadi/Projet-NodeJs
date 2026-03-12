@@ -1,6 +1,3 @@
-process.env.JWT_SECRET = 'recouvra_secret_key_2024';
-process.env.JWT_EXPIRES_IN = '7d';
-
 const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../src/app');
@@ -16,11 +13,6 @@ afterAll(async () => {
     await mongoose.connection.close();
 });
 
-<<<<<<< HEAD
-describe('Auth - Login', () => {
-    beforeAll(async () => {
-        await User.deleteMany();
-=======
 describe('Auth - Register', () => {
     it('should register a new user', async () => {
         const res = await request(app).post('/api/users/register').send({
@@ -53,7 +45,6 @@ describe('Auth - Register', () => {
 
 describe('Auth - Login', () => {
     beforeAll(async () => {
->>>>>>> main
         await request(app).post('/api/users/register').send({
             name:     'Jane Doe',
             email:    'jane@example.com',
